@@ -1,0 +1,62 @@
+// BASE
+body {
+  background-color: transparent;
+  margin: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #000;
+  font-weight: normal;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+// GRID
+.grid-container-x {
+  display: inline-grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  gap: 1rem;
+}
+
+.grid-container-y {
+  @extend .grid-container-x;
+  display: grid;
+}
+
+// TYPOGRAPHY
+h1 {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+h2 {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+h3 {
+  font-size: 1.375em;
+  font-weight: normal;
+}
+h4 {
+  font-size: 1.3125em;
+  font-weight: normal;
+}
+p {
+  font-size: 1em;
+  font-weight: normal;
+}
+span {
+  font-size: 1em;
+  font-weight: 400;
+}
+
+// typography overrides
+*.subtitle {
+  font-size: .75em;
+}
+*.caption {
+  font-size: .5em;
+}
+
