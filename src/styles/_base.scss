@@ -19,11 +19,21 @@ body {
   grid-template-columns: auto;
   grid-template-rows: auto;
   gap: 1rem;
+
+  @media (min-width: 320px) 
+  and (max-width: 414px) {
+    gap: .75rem;
+  }
 }
 
 .grid-container-y {
   @extend .grid-container-x;
   display: grid;
+
+  @media (min-width: 320px) 
+  and (max-width: 414px) {
+    gap: .75rem;
+  }
 }
 
 // TYPOGRAPHY
@@ -43,6 +53,20 @@ h4 {
   font-size: 1.3125em;
   font-weight: normal;
 }
+a {
+  color: #f8ffc6;
+  transition: color ease-in-out .1s;
+  &:hover {
+    color: #e1ff00;
+  }
+  &:not(:hover):visited {
+    color: #f8ffc6;
+  }
+  &:active {
+    color: #e9dd99;
+  }
+
+}
 p {
   font-size: 1em;
   font-weight: normal;
@@ -50,6 +74,19 @@ p {
 span {
   font-size: 1em;
   font-weight: 400;
+}
+.icon {
+  width: 100%;
+  max-width: .875rem;
+  cursor: pointer;
+  color: #f8ffc6;
+  transition: color ease-in-out .1s;
+  &:hover {
+    color: #e1ff00;
+  }
+  &:active {
+    color: #e9dd99;
+  }
 }
 
 // typography overrides

@@ -1,21 +1,37 @@
 <template>
   <section class="home grid-container-y">
     <header>
-      <h2 v-html="products.default.id.replace(/\//g, ' > ')" />
+      <h2 v-html="title" />
     </header>
 
     <!-- home/shop/new -->
     <section class="shop">
       <section class="product-list grid-container-x">
+        <Modal
+          v-if="showModal"
+          @close="showModal = false">
+          <Carousel
+            slot="body"
+            :modaldata="modaldata" />
+        </Modal>
         <div
+          class="product-container"
           v-for="(product, p) in products.default.groups"
-          :key="p"
-          class="product-container">
-          <div class="product">
-            <!-- :style="`background-image: url(`+product.hero.href+`)`" -->
+          :key="p">
+          <div
+            class="product"
+            @mouseover="showFirstThumb = p"
+            @mouseout="showFirstThumb = null"
+            :refs="p">
+            <!-- <img
+              v-show="showFirstThumb === p"
+              class="product__img--thumb"
+              @click="popModal(product.images)"
+              :src="product.images[0].href"> -->
             <img
               class="product__img"
-              :src="product.hero.href"
+              @click="popModal(product.images)"
+              :src="showFirstThumb === p ? product.images[0].href : product.hero.href"
               :alt="product.hero.rel + `image`">
             <div class="product__header">
               <span
@@ -23,22 +39,19 @@
                 v-html="product.name" />
             </div>
             <div class="product__price">
-              <span>${{ p+1 }}.00</span>
+              <span>$ {{ product.priceRange.selling.low }} - {{ product.priceRange.selling.high }}</span>
             </div>
-            <!-- <div class="product__message">
-              <span>{{ product.messages[0] }}</span>
-            </div> -->
             <div class="product__details">
-              <p>Price: ${{ p+1 }}.00</p>
-              <p>{{ product.messages[0] }}</p>
-              <p>Rank: </p>
               <p>
                 <a
                   target="_blank"
                   :href="product.links.www">
-                  View Product
+                  Quicklook
                 </a>
               </p>
+              <p v-html="product.name" />
+              <p>{{ product.messages[0] }}</p>
+              <p>$ {{ product.priceRange.selling.low }} - {{ product.priceRange.selling.high }}</p>
             </div>
           </div>
         </div>
@@ -50,29 +63,47 @@
 
 <script>
 import * as productJSON from '../data/content.json';
+import Modal from './shared/Modal';
+import Carousel from './shared/Carousel';
 
-/* eslint-disable */
 export default {
   name: 'ShopHome',
-  props: {
+  components: {
+    Modal,
+    Carousel
   },
   data() {
     return {
       products: null,
-      title: String
+      title: String,
+      showModal: false,
+      showFirstThumb: null,
+      modaldata: []
     };
   },
   created() {
     this.products = this.getProducts(productJSON);
-    this.title = this.products.default.id.replace(/\//, '>');
+    this.title = this.products.default.id.replace(/\//g, ' > ');
   },
   methods: {
     getProducts(data) {
       const products = (data);
-      console.log('got the products: ', products.default);
       return products;
     },
-    formatProducts(unparsed) {
+    formatData(data) {
+      let urls = [];
+      for (let i = 0; i < data.length; i++) {
+        const el = data[i];
+        if (el.href) {
+          urls.push(el.href)
+        }
+      }
+      return urls;
+    },
+    popModal(imgs) {
+      const urls = this.formatData(imgs);
+      this.modaldata = urls;
+      this.showModal = true;
     }
   }
 }

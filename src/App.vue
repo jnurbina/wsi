@@ -5,7 +5,9 @@
 </template>
 
 <script>
-import ShopHome from './components/ShopHome.vue';
+
+// Main
+import ShopHome from './components/ShopHome';
 
 export default {
   name: 'App',

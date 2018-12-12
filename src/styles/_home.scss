@@ -4,14 +4,21 @@
   padding: 1rem;
   box-sizing: border-box;
 
+  @media (min-width: 320px) 
+  and (max-width: 414px) {
+    margin: 1.5rem 0 1.5rem;
+    padding: 0;
+  }
+
   header {
     width: 100%;
     display: flex;
     flex-flow: column wrap;
 
-    h1 {
+    h2 {
       width: 100%;
       margin-bottom: 1rem;
+      text-transform: capitalize;
     }
     p {
       margin-bottom: 1rem;
