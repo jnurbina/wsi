@@ -23,11 +23,6 @@
             @mouseover="showFirstThumb = p"
             @mouseout="showFirstThumb = null"
             :refs="p">
-            <!-- <img
-              v-show="showFirstThumb === p"
-              class="product__img--thumb"
-              @click="popModal(product.images)"
-              :src="product.images[0].href"> -->
             <img
               class="product__img"
               @click="popModal(product.images)"

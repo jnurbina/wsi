@@ -5,9 +5,9 @@
       class="carousel"
       tag="div">
       <div
-        v-for="(url) in carouselOrder"
+        v-for="(url, u) in carouselOrder"
         class="slide"
-        :key="url">
+        :key="u">
         <img :src="url">
       </div>
     </TransitionGroup>
@@ -64,16 +64,28 @@ export default {
     }
   },
   mounted() {
+    if (this.modaldata.length <= 2) {
+      this.modaldata.push(this.modaldata[0]);
+      this.modaldata.sort();
+    }
     this.carouselOrder = this.modaldata;
   },
   methods: {
     next() {
-      const first = this.carouselOrder.shift();
-      this.carouselOrder = this.carouselOrder.concat(first);
+      if (this.carouselOrder[1] === this.carouselOrder[2]) {
+        this.carouselOrder.splice(1, 1, this.carouselOrder[0]);
+      } else {
+        const first = this.carouselOrder.shift();
+        this.carouselOrder = this.carouselOrder.concat([first]);
+      }
     },
     previous() {
-      const last = this.carouselOrder.pop();
-      this.carouselOrder = [last].concat(this.carouselOrder);
+      if (this.carouselOrder[1] === this.carouselOrder[0]) {
+        this.carouselOrder.splice(1, 1, this.carouselOrder[2]);
+      } else {
+        const last = this.carouselOrder.pop();
+        this.carouselOrder = [last].concat(this.carouselOrder);
+      }
     }
   }
 }

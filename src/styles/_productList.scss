@@ -21,19 +21,6 @@
     box-sizing: border-box;
     overflow: hidden;
 
-    /* Tablet */
-    /* @media (max-device-width: 1024px) {
-      &__price {
-        bottom: 1rem;
-        padding: 0.25rem;
-
-        > span {
-          font-size: .75em;
-        }
-      }
-    } */
-
-    /* Mobile */
     @media (min-width: 415px) 
     and (max-width: 811px) { 
       position: relative;
@@ -150,10 +137,4 @@
       }
     }
   }
-
-  /* &:nth-child(8), &:nth-child(9) {
-    .product__img {
-      height: 363px; //these two images were cropped incorrectly
-    }
-  } */
 }

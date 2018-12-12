@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  baseUrl: '/',
   css: {
     modules: true,
     loaderOptions: {
